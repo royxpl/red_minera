@@ -1,0 +1,177 @@
+
+
+
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <!--BOTTON REGRESAR -->
+    <ion-grid class="ion-padding-horizontal background-opts" [ngStyle]="background">
+      <ion-row class="ion-no-padding">
+        <ion-col class="ion-no-padding">
+          <ion-header class="ion-no-border">
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="goBack()" class="back-btn">
+                  <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!--FIN BOTTON REGRESAR -->
+
+    <ion-grid class="ion-padding white">
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-padding-vertical">
+          <h1 class="title ion-no-padding ion-no-margin">Registrate como:</h1>
+          <!--<ion-text color="light">Proporciona tu información para continuar</ion-text> -->
+        </ion-col>
+
+        <ion-segment>
+          <ion-segment-button value="friends" (click)="registrar_persona()" >
+            <ion-label>Persona</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="enemies " (click)="registrar_empresa()" >
+            <ion-label>Empresa</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+
+
+      </ion-row>
+
+
+    <!--REGISTRO EMPRESA-->
+    <div *ngIf="!reg_empresa_activate">
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <!--PRIMER NOMBRE-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Nombre Empresa</ion-label>
+              <ion-input
+                        type="text"
+                        placeholder="Escribe tu nombre aqui"
+                        [(ngModel)]="user.firts_name"
+                        name="firts_name"
+                        pattern="[a-zA-Z0-9-]*"
+                        required
+                        #firts_name="ngModel">
+
+              </ion-input>
+            </ion-item>
+            <p   ion-text color="danger" *ngIf="firts_name.errors">Ingrese soo caracteres</p>
+            <!--APELLIDO-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">tipo de Empresa</ion-label>
+              <ion-input
+                        type="text"
+                        placeholder="Escribe tu apeliido aqui"
+                        [(ngModel)]="user.sur_name"
+                        pattern="[a-zA-Z0-9-]*"
+                        required
+                        #sur_name="ngModel"
+                        name="sur_name">
+              </ion-input>
+            </ion-item>
+            <p  ion-text color="danger" *ngIf="sur_name.errors">Ingrese solo caracteres</p>
+            <!--EMAIL-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Correo Electronico</ion-label>
+              <ion-input
+                        type="email"
+                        placeholder="Ingresa Email"
+                        [(ngModel)]="user.email"
+                        #correo="ngModel"
+                        name="email" required email >
+              </ion-input>
+            </ion-item>
+              <p color="danger" *ngIf="correo.errors">Correo Requerido</p>
+
+            <!--USER NAME-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">RUC</ion-label>
+              <ion-input
+                        type="text"
+                        placeholder="Ingresa tu usuario aqui"
+                        [(ngModel)]="user.user"
+                        name="user"
+                        (Change)='validate(user)'
+                        ><!--(ion-change)="validate(username)-->
+              </ion-input>
+
+            </ion-item>
+            <!--REGISTRO PASSWORD-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Password</ion-label>
+              <ion-input
+                        type="password"
+                        placeholder="Escribe tu password"
+                        [(ngModel)]="user.password"
+                        #password="ngModel"
+                        required minlength="6"
+                        name="password">
+              </ion-input>
+              <p  ion-text color="danger" *ngIf="password.errors">contraseña minimo 6</p>
+            </ion-item>
+            <!--BOTTON CREAR CUENTA-->
+            <div class="ion-padding-vertical"> <!--[disabled]="registerForm.invalid"-->
+              <ion-button  class="action-button gradient-button" expand="block"
+                fill="solid" type="submit">
+                <span>Crear una Cuenta</span>
+              </ion-button>
+            </div>
+          </form>
+
+        </ion-col>
+      </ion-row>
+
+    </div>
+    <!--FIN REGISTRO EMPRESA-->
+
+    <!--REGISTRO PERSONA-->
+    <div *ngIf="reg_empresa_activate">
+        <div id="sign-in-button"></div>
+
+        <div class="main">
+          <ion-card no-margin>
+            <ion-card-content>
+              <ion-row class="row">
+
+
+              <ion-grid class="phoneAuthGrid">
+                <ion-row>
+                  <ion-col size="4">
+                    <ion-select class="phoneCountry" value="brown" okText="Okay" cancelText="Dismiss"
+                      (ionChange)="CodigoPaisChange($event)" [value]="CountryCode">
+                      <ion-select-option *ngFor="let country of CountryJson" value={{country.dial_code}}>
+                        {{country.dial_code + ' ' + country.name}}</ion-select-option>
+                    </ion-select>
+                  </ion-col>
+                  <ion-col size="8">
+                    <ion-input clearInput type="test" placeholder="Ingresa tu numero aqui" [(ngModel)]="PhoneNo"
+                      class="input ion-padding-horizontal" clear-input="true"></ion-input>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-button expand="block" (click)="IniciarconTelefono($event)" color="undefined"
+                      class="btn-transition">
+                      Verificar</ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+            </ion-card-content>
+
+          </ion-card>
+        </div>
+    </div>
+    <!--FIN REGISTRO PERSONA-->
+
+
+    </ion-grid>
+  </div>
+</ion-content>

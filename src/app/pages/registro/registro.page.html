@@ -1,0 +1,80 @@
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <!--BOTTON REGRESAR -->
+    <ion-grid class="ion-padding-horizontal background-opts" [ngStyle]="background" >
+      <ion-row class="ion-no-padding">
+        <ion-col class="ion-no-padding">
+          <ion-header class="ion-no-border">
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="goBack()" class="back-btn">
+                  <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!--FIN BOTTON REGRESAR -->
+
+
+
+    <!--REGISTRO EMPRESA-->
+    <div *ngIf="reg_formulario_activate">
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+            <!--PRIMER NOMBRE-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Nombre</ion-label>
+              <ion-input
+                        type="text"
+                        placeholder="Escribe tu nombre aqui"
+                        [(ngModel)]="user.firts_name"
+                        name="firts_name"
+                        pattern="[a-zA-Z]*"
+                        required
+                        #firts_name="ngModel">
+
+              </ion-input>
+            </ion-item>
+            <p   ion-text color="danger" *ngIf="firts_name.errors">Ingrese soo caracteres</p>
+            <!--APELLIDO-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Apellido</ion-label>
+              <ion-input
+                        type="text"
+                        placeholder="Escribe tu apeliido aqui"
+                        [(ngModel)]="user.sur_name"
+                        pattern="[a-zA-Z]*"
+                        required
+                        #sur_name="ngModel"
+                        name="sur_name">
+              </ion-input>
+            </ion-item>
+            <p  ion-text color="danger" *ngIf="sur_name.errors">Ingrese solo caracteres</p>
+
+
+            <!--BOTTON CREAR CUENTA-->
+            <div class="ion-padding-vertical"> <!--[disabled]="registerForm.invalid"-->
+              <ion-button  class="action-button gradient-button" expand="block"
+                fill="solid" type="submit">
+                <span>Registrar</span>
+              </ion-button>
+            </div>
+          </form>
+
+        </ion-col>
+      </ion-row>
+
+    </div>
+    <!--FIN REGISTRO PERSONA-->
+
+
+  </div>
+</ion-content>
+
+

@@ -1,0 +1,95 @@
+<ion-content [fullscreen]="true">
+
+  <div class="container">
+
+
+    <!--LOG Y BIENVENIDA-->
+    <ion-grid class="ion-padding-horizontal background-opts" [ngStyle]="background">
+      <ion-row >
+        <ion-col  class="ion-padding-vertical">
+          <div class="logo">
+            <img class="logo-icon " src="../../../assets/icon/logo.png" alt="">
+          </div>
+          <div class="texto">
+            <span class="logo-text">
+              Centro Minero
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!--FIN LOGO Y BIENVENIDA -->
+
+
+    <!-- TIPO DE INICIO -->
+    <ion-grid class="ion-padding white">
+
+      <!-- TEXTO BIENVENIDA -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col size="9" class="ion-padding-vertical">
+          <h1 class="title ion-no-padding ion-no-margin">Bienvenido </h1>
+          <!--<ion-text color="light">Elija una opción para continuar</ion-text> -->
+        </ion-col>
+      </ion-row>
+      <!-- FIN TEXTO BIENVENIDA -->
+
+      <!-- BOTON INICIAR SESION -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-text-center">
+        <ion-button class="action-button gradient-button ion-margin-top" expand="block" fill="solid"  color="warning" (click)="goToLogin()">
+          <!--<ion-icon name="mail" class="ion-padding-end"></ion-icon>-->
+          <ion-icon name="person-outline" class="ion-padding-end"></ion-icon>
+          <span >Iniciar Sesión</span>
+        </ion-button>
+
+        <!--Continue with Google--------------------------------------
+        <ion-button class="action-button ion-margin-top" expand="block" fill="outline" color="medium">
+          <ion-icon name="logo-google" class="ion-padding-end"></ion-icon>
+          <span>Continue with Google</span>
+        </ion-button>
+        ----------------------------------------->
+        </ion-col>
+      </ion-row>
+      <!-- FIN BOTON INICIAR SESION -->
+
+      <!-- O -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-text-center">
+          <ion-text color="medium">O</ion-text>
+        </ion-col>
+      </ion-row>
+      <!-- FIN O -->
+
+      <!-- CREAR CUENTA -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-padding-bottom">
+          <ion-button class="action-button ion-margin-top" expand="block" fill="outline" color="medium" (click)="goToRegister()">
+            <ion-icon name="person-add" class="ion-padding-end"></ion-icon>
+            <span>Create una Cuenta Gratuita</span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <!-- FIN CREAR CUENTA -->
+
+      <!-- RECUPERAR CONTRA -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="ion-padding-bottom">
+          <div class="texto"  (click)="goToRegister()" >
+            <span class="text-u-l inline"  >
+              ¿Olvidaste tu contraseña?
+            </span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <!-- FIN RECUPERAR CONTRA-->
+
+    </ion-grid>
+    <!--FIN TIPO DE INICIO -->
+
+
+
+  </div>
+
+
+
+</ion-content>

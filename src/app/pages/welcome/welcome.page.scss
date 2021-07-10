@@ -1,0 +1,110 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.ios .container {
+  height: 100% !important;
+}
+/* FONDO amarillo*/
+.background-opts {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000pt hsl(41deg 98% 58%);//rgba(106, 73, 73, 0.3);
+  --background: transparent;
+  max-height: 100%;
+}
+
+/*****************LOGO***********************/
+.logo {
+  margin-top: 10vh;
+  text-align:center;
+}
+.logo-icon {
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+}
+/***************FIN LOGO ******************************/
+
+.texto{
+  text-align:center;
+}
+.logo-text {
+  vertical-align: middle;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -2px
+}
+
+ion-header ion-toolbar {
+  --background: transparent;
+}
+
+h1.title {
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--ion-color-dark);
+  margin-bottom: 8px;
+}
+
+ion-text {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/*********BOTONES**************************/
+.action-button {
+  --border-radius: 8px;
+  --box-shadow: none !important;
+  min-height: 48px;
+  box-shadow: none !important;
+
+  /* TAMAÑO LETRA DE BOTONES*/
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: initial;
+  }
+}
+
+/************************/
+.white {
+  background: #ffffff;
+  border-radius: 16px 16px 0 0;
+  position: absolute;
+  bottom: 0;
+}
+
+ion-grid {
+  width: 100%; /*tamaño cuadricula logo y nombre*/
+}
+
+/* iPhone X ----------- */
+@media only screen and (max-device-height: 812px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles */
+  .background-opts {
+    max-height: 60%;
+  }
+}
+
+@media only screen and (max-device-height: 823px) and (orientation: portrait) {
+  /* Styles */
+  .background-opts {
+    max-height: 60%;
+  }
+}
+
+/* iPhone XS Max, XR ----------- */
+@media only screen and (max-device-height: 896px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
+  /* Styles */
+  .background-opts {
+    max-height: 60%;
+  }
+}
+
+

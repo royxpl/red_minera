@@ -1,0 +1,190 @@
+
+<!-- ABRE NOTIFICASION-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Explore</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToNotifications()">
+        <ion-icon
+          slot="icon-only"
+          name="notifications"
+          color="light"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!--FIN ABRE NOTIFICASION-->
+
+<ion-content [fullscreen]="true" class="ion-padding-horizontal">
+  <ion-grid>
+
+    <!--ESTADOS -->
+    <ion-row>
+      <ion-col class="ion-padding-vertical">
+        <ion-slides [options]="usersConfig">
+          <ion-slide>
+            <ion-button class="story-button" fill="clear" shape="round">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-slide>
+          <ion-slide *ngFor="let item of users; index as i">
+            <app-story-avatar
+              [avatar]="item.userPicture"
+              [name]="item.userName"
+              [live]="!item.seen"
+              [active]="item.active"
+              (click)="viewStory(i)"
+            ></app-story-avatar>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <!--FIN ESTADOS-->
+
+    <!--TITULO HISTORIAS RECIENTES -->
+    <ion-row>
+      <ion-col class="ion-no-padding half-padding">
+        <ion-item lines="none" class="section">
+          <ion-text color="light">
+            <h5 class="section-title">Stories Recientes </h5>
+          </ion-text>
+          <a slot="end" [routerLink]="">See All</a>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--FIN TITULO HISTORIAS RECIENTES-->
+
+    <!--POST RECIENTES -->
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-slides [options]="storiesConfig">
+          <ion-slide *ngFor="let item of stories let i = index;">
+            <app-story-card
+              [image]="item.image"
+              [avatar]="item.avatar"
+              [name]="item.name"
+              [date]="item.date"
+            >
+            </app-story-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <!--FIN POST RECIENTES -->
+
+    <!--TITULO POST RECIENTES -->
+    <ion-row>
+      <ion-col class="ion-no-padding half-padding">
+        <ion-item lines="none" class="section">
+          <ion-text color="light">
+            <h5 class="section-title">Posts Recientes</h5>
+          </ion-text>
+          <a slot="end" [routerLink]="">See All</a>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--FIN TITULO POST RECIENTES -->
+
+    <!--CARDS-->
+    <ion-row>
+      <ion-col
+        size-sm="12"
+        size-md="6"
+        size-lg="4"
+        size-lg="4"
+        *ngFor="let item of feeds let i=index; "
+      >
+        <app-feed-card
+          (click)="navigateToDetail()"
+          [avatar]="item.avatar"
+          [name]="item.name"
+          [date]="item.date"
+          [images]="item.images"
+          [likes]="item.likes"
+          [comments]="item.comments"
+          [separator]="false"
+        >
+        </app-feed-card>
+      </ion-col>
+    </ion-row>
+    <!--FIN CARDS-->
+
+    <!--TITULO SUGERENCIAS PARA TI  -->
+    <ion-row>
+      <ion-col class="ion-no-padding half-padding">
+        <ion-item lines="none" class="section">
+          <ion-text color="light">
+            <h5 class="section-title">Sugerencias para ti</h5>
+          </ion-text>
+          <a slot="end" [routerLink]="">See All</a>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--FIN TITULO SUGERENCIAS PARA TI -->
+
+    <!--PERFIL SUGERENCIAS PARA TI  -->
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-slides [options]="followConfig">
+          <ion-slide *ngFor="let item of follow let i = index;">
+            <app-follow-card
+              [image]="item.image"
+              [name]="item.name"
+              [location]="item.location"
+            >
+            </app-follow-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <!--FIN PERFIL SUGERENCIAS PARA TI -->
+
+    <!--TITULO VENTOS RECIENTES  -->
+    <ion-row>
+      <ion-col class="ion-no-padding half-padding">
+        <ion-item lines="none" class="section">
+          <ion-text color="light">
+            <h5 class="section-title">Eventos Recientes</h5>
+          </ion-text>
+          <a slot="end" routerLink="/tabs/events">See All</a>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--FIN TITULO EVENTOS RECIENTES  -->
+
+    <!--VENTOS RECIENTES  -->
+    <ion-row>
+      <ion-col
+        size-sm="12"
+        size-md="6"
+        size-lg="4"
+        size-lg="4"
+        *ngFor="let item of events let i = index;"
+      >
+        <app-event-card
+
+        [image]="item.image"
+        [name]="item.name"
+        [from]="item.from"
+        [to]="item.to"
+        [date]="item.date"
+        [location]="item.location"
+        [avatars]="item.attend.avatars"
+        [total]="item.attend.total"
+        (click)="eventDetail(item)"
+
+        ></app-event-card>
+      </ion-col>
+    </ion-row>
+    <!--FIN VENTOS RECIENTES
+
+
+
+
+
+    -->
+
+
+  </ion-grid>
+</ion-content>

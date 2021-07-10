@@ -1,0 +1,94 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+
+    <!--BOTTON REGRESAR -->
+    <ion-grid class="ion-padding-horizontal background-opts" [ngStyle]="background">
+      <ion-row class="ion-no-padding">
+        <ion-col class="ion-no-padding">
+          <ion-header class="ion-no-border">
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="goBack()" class="back-btn">
+                  <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!--FIN BOTTON REGRESAR -->
+
+    <ion-grid class="ion-padding white">
+
+      <!--TEXTO TITULO  -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col size="9" class="ion-padding-vertical">
+          <h1 class="title ion-no-padding ion-no-margin">Inicia Sesión</h1>
+          <ion-text color="light">Ingresa tus credenciales</ion-text>
+        </ion-col>
+      </ion-row>
+      <!--FIN TEXTO TITULO -->
+
+      <!--CAMPO INICIAR SESSION -->
+      <ion-row class="ion-padding-horizontal">
+        <ion-col class="">
+          <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <!--REGISTRO EMAIL -->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Email </ion-label>
+              <ion-input
+                          type="email"
+                          placeholder="Ingresa Email"
+                          [(ngModel)]="user.email"
+                          name="email">
+              </ion-input>
+            </ion-item>
+            <!--FIN REGISTRO EMAIL -->
+
+            <!--REGISTRO PASSWORD  -->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Password</ion-label>
+              <ion-input
+                          type="password"
+                          placeholder="Escribe tu password"
+                          [(ngModel)]="user.password"
+                          name="password">
+              </ion-input>
+            </ion-item>
+            <!--FIN REGISTRO PASSWORD  -->
+
+            <!-- CASILLA RECORDAR MI CLAVE-->
+            <ion-item lines="none" class="ion-no-padding">
+              <ion-label class="input-label" position="stacked">Remember me</ion-label>
+              <ion-checkbox slot="start"
+                          type="checkbox"
+                          [(ngModel)]="rememberMe"
+                          name="remember-me">
+              </ion-checkbox>
+            </ion-item>
+
+            <!-- FIN CASILLA RECORDAR MI CLAVE-->
+
+            <!-- BOTON INICIAR LOGIN-->
+            <div class="ion-padding-vertical">
+              <ion-button class="action-button gradient-button" expand="block"
+                fill="solid" type="submit">
+                <span>Login</span>
+              </ion-button>
+            </div>
+            <!-- FIN BOTON INICIAR LOGIN-->
+          </form>
+        </ion-col>
+      </ion-row>
+      <!--FIN CAMPO INICIAR SESSION -->
+
+      <!-- CAMPO RECUPERAR CONTRASEÑA -->
+      <!--FIN CAMPO RECUPERAR CONTRASEÑA -->
+
+      <!-- CAMPO NUEVA CONTRASEÑA -->
+      <!--FIN CAMPO NUEVA CONTRASEÑA -->
+
+    </ion-grid>
+  </div>
+</ion-content>
