@@ -9,22 +9,16 @@ import {
 } from '@angular/common/http';
 import { map, switchMap, share } from 'rxjs/operators';
 import * as Global from '../global';
-/* MOLDES */
 import { UsersModel } from '../models/users.models';
 //import { resolve } from 'dns';
-
-/******************************** */
 import firebase from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
-
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
 
-  /** Variables Globales **/
   private api: string = Global.Api.url;
   private register: string = Global.Register.url;
   private login: string = Global.Login.url;
@@ -35,15 +29,10 @@ export class ApiService {
   private verifyPasswordResetCode: string = Global.VerifyPasswordResetCode.url;
   private getUserData:string = Global.GetUserData.url;
   confirmationResult: firebase.auth.ConfirmationResult;
-  /** Constructor /*/
   constructor(public http: HttpClient,
               private fireAuth: AngularFireAuth) {}
-
-/** Metodo inicio con TELEFONO */
 public signInWithPhoneNumber(recaptchaVerifier, phoneNumber) {
-
   return new Promise<any>((resolve, reject) => {
-    /** Metodo  registra con numero y captcha */
     this.fireAuth.signInWithPhoneNumber(phoneNumber, recaptchaVerifier)
       .then((confirmationResult) => {
         this.confirmationResult = confirmationResult;
@@ -55,7 +44,6 @@ public signInWithPhoneNumber(recaptchaVerifier, phoneNumber) {
       });
   });
 }
-
 public async enterVerificationCode(code) {
   return new Promise<any>((resolve, reject) => {
     this.confirmationResult.confirm(code).then(async (result) => {
@@ -66,72 +54,45 @@ public async enterVerificationCode(code) {
     }).catch((error) => {
       reject(error.message);
     });
-
   });
 }
 
-/******************************************************************************************** */
-
-
-  /** Metodo REGISTRAR usuario en AUTHENTICATION de Firebase **/
   registerAuth(user: UsersModel) {
     return this.http.post(`${this.register}`, user);
   }
-
-  /** Metodo REGISTRAR usuario en REALTIME de firebase **/
   registerDatabase(user: UsersModel) {
     delete user.password;
     delete user.returnSecureToken;
 
     return this.http.post(`${this.api}/users.json`, user);
   }
-
-  /** Metodo LOGIN REALTIME */
   loginAuth(user: UsersModel) {
-    //recibe el usuario
 
     return this.http.post(`${this.login}`, user);
   }
-
-  /** Metod Filtrar para buscar coincidencias para username email */
   getFilterData(orderBy: string, equalTo: string) {
     return this.http.get(
       `${this.api}/users.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`
     );
   }
-
-  /** Metodo para actualizar data usuario**/
   patchData(id: string, value: object) {
     return this.http.patch(`${this.api}/users/${id}.json`, value);
   }
-
-  /** Resetear la contraseña */
   sendPasswordResetEmailFnc(body: object) {
     return this.http.post(`${this.sendPasswordResetEmail}`, body);
   }
-
-  /** Confirmar Password enviar el password */
   confirmPasswordResetFnc(body: object) {
     return this.http.post(`${this.confirmPasswordReset}`, body);
   }
-
-  /** Enviar verificación de correo electrónico */
   sendEmailVerificationFnc(body: object) {
     return this.http.post(`${this.sendEmailVerification}`, body);
   }
-
-  /** Confirmar Email de Verificasion */
   confirmEmailVerificationFnc(body: object) {
     return this.http.post(`${this.confirmEmailVerification}`, body);
   }
-
-  /** Confirmar el cambio de la contraseña*/
   verifyPasswordResetCodeFnc(body: object) {
     return this.http.post(`${this.verifyPasswordResetCode}`, body);
   }
-
-  /** Validar idToken de Autenticación */
-
   authActivate(){
 
     return new Promise(resolve=>{
@@ -170,6 +131,4 @@ public async enterVerificationCode(code) {
       }
     })
   }
-
-
 }

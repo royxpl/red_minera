@@ -22,7 +22,6 @@ export class WelcomePage implements OnInit {
   ngOnInit() { }
 
 
-  /* FUNCION LOGIN *****/
   async goToLogin() {
 
     this.router.navigate(['/login']);
@@ -38,10 +37,8 @@ export class WelcomePage implements OnInit {
       //this.router.navigate(['/login']);
     }, 1000); // dummy loader for Loggin In*/
   }
-  /* FIN FUNCION LOGIN *****/
 
 
-  /* FUNCION REGISTRO USUARIO *****/
   async goToRegister() {
 
     this.router.navigate(['/register']);
@@ -58,7 +55,5 @@ export class WelcomePage implements OnInit {
       this.router.navigate(['/register']);
     }, 1000); // dummy loader for Loggin In*/
   }
-  /* FIN FUNCION REGISTRO USUARIO *****/
-
 
 }

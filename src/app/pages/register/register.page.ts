@@ -22,10 +22,10 @@ import { environment } from 'src/environments/environment';
 })
 export class RegisterPage implements OnInit {
 
-  /** Variables Globales **/
+
   public usersms:UsersSms;
   public user: UsersModel;
-  public status:string;	//--> estado del login
+  public status:string;
   registerForm: FormGroup;
   submitted = false;
   reg_empresa_activate: boolean = true;
@@ -38,10 +38,9 @@ export class RegisterPage implements OnInit {
 
   CountryJson = environment.CountryJson;
   CountryCode: any = '+51';
-  recaptchaVerifier: firebase.auth.RecaptchaVerifier;  //EL RECOPACHET POR FIREBASE
+  recaptchaVerifier: firebase.auth.RecaptchaVerifier;
   PhoneNo: any;
 
-  /**Constructor **/
   constructor(
 
     //private authService:AuthServiceService,
@@ -99,12 +98,12 @@ export class RegisterPage implements OnInit {
 
   // Button event after the nmber is entered and button is clicked
   IniciarconTelefono($event) {
-    console.log('country', this.recaptchaVerifier); //EL RECAPTCHE POR FIREBASE
+    console.log('country', this.recaptchaVerifier);
 
-    if (this.PhoneNo && this.CountryCode) {  //si el nro y pais existen entrar sesion conphone
+    if (this.PhoneNo && this.CountryCode) {
       this.apiService.signInWithPhoneNumber(this.recaptchaVerifier, this.CountryCode + this.PhoneNo).then(
         success => {
-          this.OtpVerificacion();// llamamos a alerta
+          this.OtpVerificacion();
         }
       );
     }
@@ -125,7 +124,7 @@ export class RegisterPage implements OnInit {
       buttons: [{
         text: 'Enter',
         handler: (res) => {
-          this.apiService.enterVerificationCode(res.otp).then(//aqui entra el codigo
+          this.apiService.enterVerificationCode(res.otp).then(
             userData => {
               this.showSuccess();
 
@@ -157,8 +156,6 @@ export class RegisterPage implements OnInit {
     alert.present();
   }
 
-
-  /** Validar datos de persona esto va en el html*/
   validate(input):void{
 
 
@@ -190,21 +187,19 @@ export class RegisterPage implements OnInit {
   }
 
 
-  /** Evento activado para validar formulario**/
-  onSubmit(f:NgForm){ //console.log("f",f);
+
+  onSubmit(f:NgForm){
     if(f.invalid){
       console.log("hay algo malo en los datos enviados por el formulario");
       return;
     }
     console.log("cargando...");
-    /** Registro en Firebase Authentication **/
     this.user.returnSecureToken = true;
     this.cargando();
     this.apiService.registerAuth(this.user)
       .subscribe(resp=>{
         console.log("user",resp);
         if(resp["email"]==this.user.email){
-          /**Enviar correo de verificación */
           let body={
             requestType:"VERIFY_EMAIL",
             idToken:resp["idToken"]
@@ -212,7 +207,6 @@ export class RegisterPage implements OnInit {
           this.apiService.sendEmailVerificationFnc(body)
           .subscribe(resp=>{
             if(resp["email"]==this.user.email){
-              /** Registro en Firebase Database */
               this.user.displayName = `${this.user.firts_name} ${this.user.sur_name}`;
               this.user.method ="direct";
               this.user.needConfirm = false;
@@ -226,8 +220,6 @@ export class RegisterPage implements OnInit {
                 //console.log("solo sale +ID user: token",resp);
                 this.router.navigate(['/login']);
                 console.log("Confirmar tu cuenta y tu email ");
-                //this.showAlert("Enviamos una verificasion de cuenta a tu Email");
-
                 if(!this.user.needConfirm){
                   this.router.navigate(['/onboarding']);
                 }

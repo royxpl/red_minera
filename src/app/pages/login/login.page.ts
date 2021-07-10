@@ -18,7 +18,6 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class LoginPage implements OnInit {
 
-  /** Variables Globales **/
   public user: UsersModel;
   public rememberMe:boolean = false;
 
@@ -29,7 +28,6 @@ export class LoginPage implements OnInit {
       'url(https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1051&q=80)',
   };
 
-  /**Constructor **/
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -41,8 +39,6 @@ export class LoginPage implements OnInit {
   ) {
     this.user = new UsersModel();
   }
-
-  /** Datos Iniciales **/
   ngOnInit() {
 
     if(localStorage.getItem("rememberMe")&& localStorage.getItem("rememberMe")=="yes"){
@@ -57,7 +53,6 @@ export class LoginPage implements OnInit {
       this.apiService.confirmEmailVerificationFnc(body)
       .subscribe(resp=>{
         if(resp["emailVerified"]){
-          /** Actualizar Confirmacion de correo en Database */
           this.apiService.getFilterData("email",resp["email"])
           .subscribe(resp=>{
             for(const i in resp){
@@ -81,7 +76,6 @@ export class LoginPage implements OnInit {
         }
       })
     }
-        /** Confirmar cambio de contraseña */
     if(this.activatedRoute.snapshot.queryParams["obbCode"]!=undefined && this.activatedRoute.snapshot.queryParams["mode"]=="resetPassword"){
       let body={
         obbCode:this.activatedRoute.snapshot.queryParams["obbCode"]
@@ -146,7 +140,6 @@ export class LoginPage implements OnInit {
     })
   }
 
-  /** Metodo Enviar solicitud para recuperar contraseña **/
   resetPassword(value){
     console.log("cargando resset pasword");
     this.apiService.getFilterData("email",value)
@@ -167,7 +160,7 @@ export class LoginPage implements OnInit {
       }
     })
   }
-  /** Enviar nueva contraseña **/
+
   newPassword(value){
     if(value!=""){
       console.log("cargando new pasword...");
@@ -184,7 +177,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  /** Metodo regresar a welcome */
+
   goBack() {
     this.router.navigate(['/welcome']);
   }
