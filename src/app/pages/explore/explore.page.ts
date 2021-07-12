@@ -15,7 +15,7 @@ export class ExplorePage implements OnInit {
   feeds:any[] = [];   //feeds: unknown;
   stories:any[] = []; //stories: unknown;
   follow:any[] = [];  //follow: unknown;
-  events:any[] = [];  //events: unknown;
+  events:any[] = [];   //events: unknown;
 
   /** Otros **/
   storiesConfig = {
